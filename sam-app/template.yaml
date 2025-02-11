@@ -14,18 +14,11 @@ Globals:
     LoggingConfig:
       LogFormat: JSON
 Resources:
-  MyApi:
+  Serverless:
     Type: AWS::Serverless::Api
     Properties:
-      Name: MyApi
+      Name: Serverless
       StageName: Prod
-#      Auth:
-#        DefaultAuthorizer: CognitoAuthorizer
-#        Authorizers:
-#          CognitoAuthorizer:
-#            UserPoolArn: arn:aws:cognito-idp:ap-south-1:277707111832:userpool/ap-south-1_vGX8mpEKK
-#            Identity:
-#              Header: Authorization
 
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -39,14 +32,14 @@ Resources:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            RestApiId: !Ref MyApi
+            RestApiId: !Ref Serverless
             Path: /hello
             Method: get
 
   TServices:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello_world/
+      CodeUri: TServices/
       Handler: app.lambda_handler
       Runtime: python3.13
       Architectures:
@@ -55,7 +48,7 @@ Resources:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            RestApiId: !Ref MyApi
+            RestApiId: !Ref Serverless
             Path: /hello/all
             Method: get
 
@@ -78,7 +71,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${Serverless}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   HelloWorldFunction:
     Description: Hello World Lambda Function ARN
     Value: !GetAtt HelloWorldFunction.Arn
