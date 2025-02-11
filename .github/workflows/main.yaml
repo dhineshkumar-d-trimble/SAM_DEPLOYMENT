@@ -31,11 +31,11 @@ jobs:
         run: |
           sam build -t ./sam-app/template.yaml
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: sam-build
-          path: ./.aws-sam/build/
+#      - name: Upload build artifacts
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: sam-build
+#          path: ./.aws-sam/build/
 
   deploy:
     runs-on: ubuntu-latest
