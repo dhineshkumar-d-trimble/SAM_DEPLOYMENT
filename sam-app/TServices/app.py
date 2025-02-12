@@ -37,7 +37,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps({
             "Trimble Servives": "The list of Services used by trimble.",
-            "The list of Services": "Construction Forestry IOT",
+            "Services": "Construction Forestry IOT",
             # "location": ip.text.replace("\n", "")
         }),
     }
