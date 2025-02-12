@@ -52,6 +52,40 @@ Resources:
             Path: /hello/all
             Method: get
 
+  EC2Fetch:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 30
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Effect: Allow
+          Action:
+            - ec2:DescribeInstances
+          Resource: "*"
+      Events:
+        ListInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /list-instances
+            Method: get
+        RunningInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /running-instances
+            Method: get
+        StoppedInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /stopped-instances
+            Method: get
+
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
     Properties:
