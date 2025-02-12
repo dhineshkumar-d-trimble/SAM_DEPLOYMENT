@@ -58,19 +58,17 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.13
       CodeUri: EC2Fetch/
-      MemorySize: 128
-      Timeout: 30
       Policies:
-        - AWSLambdaBasicExecutionRole
-        - PolicyName: EC2DescribePolicy
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - ec2:DescribeInstances
-                  - ec2:DescribeRegions
-                Resource: "*"
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:DescribeRegions",
+              "ec2:DescribeInstances"
+            ],
+            "Resource": "*"
+          }
+        ]
       Events:
         ListInstances:
           Type: Api

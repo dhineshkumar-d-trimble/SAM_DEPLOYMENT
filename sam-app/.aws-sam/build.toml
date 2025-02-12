@@ -7,6 +7,24 @@ architecture = "x86_64"
 handler = "app.lambda_handler"
 manifest_hash = "3298f13049d19cffaa37ca931dd4d421"
 packagetype = "Zip"
-functions = ["HelloWorldFunction", "TServices"]
+functions = ["HelloWorldFunction"]
+
+[function_build_definitions.a0413c5d-66c0-486b-86a8-9d09b088b031]
+codeuri = "C:\\Users\\dhinesd\\IdeaProjects\\SAM_DEMO\\sam-app\\TServices"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["TServices"]
+
+[function_build_definitions.881df214-be67-4759-882b-0bdc985df927]
+codeuri = "C:\\Users\\dhinesd\\IdeaProjects\\SAM_DEMO\\sam-app\\EC2Fetch"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["EC2Fetch"]
 
 [layer_build_definitions]
