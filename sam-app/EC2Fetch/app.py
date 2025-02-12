@@ -1,8 +1,9 @@
 import json
 import boto3
+from datetime import datetime
 
 # Initialize the EC2 client
-ec2 = boto3.client('ec2', region_name='ap-south-1')
+ec2 = boto3.client('ec2', region_name='us-east-1')
 
 # Define the paths for the endpoints
 list_instances_path = '/list-instances'
@@ -59,11 +60,17 @@ def list_stopped_instances():
         print('Error:', e)
         return build_response(400, str(e))
 
+class CustomEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super(CustomEncoder, self).default(obj)
+
 def build_response(status_code, body):
     return {
         'statusCode': status_code,
         'headers': {
             'Content-Type': 'application/json'
         },
-        'body': json.dumps(body)
+        'body': json.dumps(body, cls=CustomEncoder)
     }
