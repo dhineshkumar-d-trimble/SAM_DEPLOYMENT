@@ -3,7 +3,7 @@ import boto3
 from datetime import datetime
 
 # Initialize the EC2 client
-ec2 = boto3.client('ec2', region_name='us-east-1')
+ec2 = boto3.client('ec2', region_name='ap-south-1')
 
 # Define the paths for the endpoints
 list_instances_path = '/list-instances'
