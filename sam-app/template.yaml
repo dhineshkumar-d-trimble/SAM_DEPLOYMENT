@@ -89,6 +89,43 @@ Resources:
             Path: /stopped-instances
             Method: get
 
+  EC2info:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      CodeUri: EC2info/
+      Policies:
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:DescribeRegions",
+              "ec2:DescribeInstances"
+            ],
+            "Resource": "*"
+          }
+        ]
+      Events:
+        ListInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /list-instances/info
+            Method: get
+        RunningInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /running-instances/info
+            Method: get
+        StoppedInstances:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Serverless
+            Path: /stopped-instances/info
+            Method: get
+
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
     Properties:

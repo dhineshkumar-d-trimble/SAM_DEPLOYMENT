@@ -27,4 +27,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["EC2Fetch"]
 
+[function_build_definitions.8d45a050-8450-4c00-b7f1-a12cf15bdc93]
+codeuri = "C:\\Users\\dhinesd\\IdeaProjects\\SAM_DEMO\\sam-app\\EC2info"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["EC2info"]
+
 [layer_build_definitions]
