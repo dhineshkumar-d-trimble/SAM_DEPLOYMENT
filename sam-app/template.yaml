@@ -155,6 +155,9 @@ Outputs:
   EC2FetchArn:
     Description: Trimble Services Lambda Function ARN
     Value: !GetAtt EC2Fetch.Arn
+  EC2infoArn:
+    Description: Trimble Services Lambda Function ARN
+    Value: !GetAtt EC2info.Arn
   HelloWorldFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
     Value: !GetAtt HelloWorldFunctionRole.Arn
